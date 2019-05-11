@@ -1,0 +1,197 @@
+@import '../../../styles/variables';
+
+.Securitization-table-component {
+  padding: 20px 0;
+
+  .table-container{
+    @include not-mobile{
+      margin: 0 25px;
+    }
+  }
+
+  .mat-table {
+    font-family: $CIBCLightRegularFont;
+  }
+  .chip-span {
+    font-size: 12px;
+    padding: 5px 20px;
+    border-radius: 20px;
+    border: 2px solid $StrokeGrey;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .Securitization-table-header {
+    //font-family: $CIBCSemiBoldFont;
+    border-bottom: 2px solid $TextGrey;
+    font-family: $CIBCSemiBoldFont;
+    @include not-mobile{
+      margin-right: 20px;
+    }
+    @include mobile{
+      padding: 0 24px;
+    }
+  }
+
+  .dates-container {
+    max-height: 0;
+    transition: max-height 0.4s ease-out;
+    overflow: hidden;
+
+    .row {
+      border-bottom: 1px solid $StrokeGrey;
+
+      &:hover {
+        .text-date {
+          color: $CIBCBurgundy;
+        }
+        .inactive {
+          display: none;
+        }
+        .active {
+          display: block;
+        }
+      }
+
+      .text-date {
+        font-family: $CIBCSemiBoldFont;
+        @include not-mobile{
+          padding-left: 24px;
+        }
+      }
+
+      .active {
+        display: none;
+      }
+      .inactive {
+        display: block;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+    .icon-col {
+      text-align: center;
+
+      img {
+        height: 24px;
+        width: 39px;
+        margin: auto;
+        padding-left: 15px;
+      }
+    }
+  }
+
+  .Securitization-table-row {
+    position: relative;
+    //padding: 0 24px;
+    font-size: 14px;
+    border-bottom: 1px solid $StrokeGrey;
+    color: $TextGrey;
+    @include not-mobile{
+      margin-right: 20px;
+    }
+    @include mobile{
+      padding: 0 24px;
+    }
+    .show-details {
+      cursor: pointer;
+    }
+
+    &.opened {
+      .dates-container {
+        max-height: 500px;
+        transition: max-height 0.4s ease-in;
+      }
+      &:before {
+        display: block;
+      }
+
+      .text {
+        color: $CIBCBurgundy;
+      }
+
+      .show-details {
+        img {
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    &:before {
+      display: none;
+      content: '';
+      width: 4px;
+      height: 30px;
+      background: #8B1D41;
+      position: absolute;
+      left: 1px;
+      top: 8px;
+    }
+
+    &:hover {
+      .text {
+        color: $CIBCBurgundy;
+      }
+      .chip-span {
+        border: 2px solid white;
+      }
+
+    }
+
+    .text {
+      font-family: $CIBCSemiBoldFont;
+      @include not-mobile{
+        padding-left: 24px;
+      }
+    }
+  }
+  .title-head{
+    @include mobile{
+      //padding-left: 20px !important;
+    }
+  }
+  .Securitization-table-col {
+    padding: 12px 0;
+
+    .img-col{
+      @include mobile{
+        padding: 15px 20px;
+      }
+    }
+
+
+
+    &.show-details{
+      img{
+        padding-top: 5px;
+        @include mobile{
+          padding-top: 18px;
+        }
+      }
+    }
+  }
+
+  .date {
+    /*
+    text-align: center;
+    */
+  }
+
+  .action {
+    text-align: right;
+  }
+
+  .table-title {
+    color: $CIBCBurgundy;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .Securitization-table {
+    width: 100%;
+  }
+}

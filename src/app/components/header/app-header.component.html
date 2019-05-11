@@ -1,0 +1,157 @@
+<mat-sidenav-container class="sidenav-container" (scroll)="onWindowScroll($event);">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+               [ngClass]="{hidden: !(isHandset$ | async)}"
+               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'">
+    <!--<mat-toolbar>Menu</mat-toolbar>-->
+    <mat-nav-list>
+      <a mat-list-item class="mobile-menu-link navigation-bar">
+        <!--<i class="icofont icofont-home"></i>
+        Navigation
+        <i class="icofont icofont-close close-nav"
+           (click)="drawer.toggle()"></i>-->
+        <input placeholder="Search" class="mobile-search" type="text">
+      </a>
+      <a mat-list-item href="#" class="mobile-menu-link">HOME</a>
+      <a mat-list-item href="#" class="mobile-menu-link reports" (click)="onReportClick($event)">REPORTS
+        <i class="icofont icofont-thin-right" [ngClass]="{'hidden': reportMenuOpened}"></i>
+        <i class="icofont icofont-thin-down" [ngClass]="{'hidden': !reportMenuOpened}"></i>
+        <div class="reports-menu" [@openCloseReports]="reportMenuOpened ? 'open' : 'closed'">
+          <div class="report-link"><a [routerLink]="'/'" (click)="toggleDrawer()">ABCP</a></div>
+          <div class="report-link"><a [routerLink]="'/'" (click)="toggleDrawer()">Term ABS</a></div>
+          <div class="report-link"><a [routerLink]="'/'" (click)="toggleDrawer()">Issuance Documents</a></div>
+        </div>
+      </a>
+      <a mat-list-item href="#" class="mobile-menu-link"
+         [routerLink]="'/account'"
+         (click)="toggleDrawer()">ACCOUNT</a>
+    </mat-nav-list>
+
+    <div class="mobile-head-footer-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-6 register" [routerLink]="'/register'" (click)="toggleDrawer()">Register</div>
+          <div class="col-6"><a class="sign-on" href="http://crossleafdevelopment.com/loginrefresh/Login_Page.html">Sign
+            On</a></div>
+        </div>
+      </div>
+      <div class="special-offers">
+        Special Offers
+      </div>
+      <a href="#" class="link">CIBC Capital Market</a>
+      <a href="#" class="link">CIBC Website</a>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="header-toolbar">
+      <div *ngIf="isHandset$ | async" class="mobile-toolbar">
+        <div class="handset-logo">
+          <a [routerLink]="'/'">
+            <img class="footer-logo-image" src="assets/images/Footer_Logo.png" alt="CIBC">
+            <span class="mobile-logo-heading">CIBC CAPITAL MARKETS</span>
+          </a>
+        </div>
+        <!--<div class="handset-sign-on">
+          <a (click)="toggleMobileDropdown()"><i class="feather icon-more-horizontal"></i>
+          </a>
+        </div>-->
+        <!--<button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          class="black-iocn">
+          <i class="icofont icofont-navigation-menu"></i>
+        </button>-->
+        <button type="button"
+                aria-label="Toggle sidenav"
+                (click)="toggleDrawer()"
+                class="black-iocn hamburger hamburger--collapse" [ngClass]="{'is-active': toggleSideNav}">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+      </div>
+      <!--<div class="mobile-dropdown-menu"
+           [ngClass]="{hidden: !(isHandset$ | async), shown: toggleDropdown}">
+        <a [routerLink]="'/register'" class="dropdown-menu-item" (click)="toggleMobileDropdown()">
+          <i class="icofont icofont-ui-contact-list"></i>
+          <div class="item-text">Register</div>
+        </a>
+        <a [routerLink]="'/'" class="dropdown-menu-item" (click)="toggleMobileDropdown()">
+          <i class="icofont icofont-login"></i>
+          <div class="item-text">Sign On</div>
+        </a>
+      </div>-->
+
+      <div [ngClass]="{hidden: (isHandset$ | async)}" class="menu-row" id="menu-row">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 cibc-flex-col">
+              <a class="top-link" href="#">CIBC Capital Market</a>
+              <a class="top-link" href="#">CIBC Website</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="sticky-header" class="main-header" [ngClass]="{hidden: (isHandset$ | async)}">
+        <div class="logo-row-container">
+          <div class="container">
+            <div class="logo-row">
+              <div class="col-lg-7 col-sm-7">
+                <a [routerLink]="'/'">
+                  <img class="footer-logo-image" src="assets/images/Footer_Logo.png"
+                       alt="CIBC">
+                </a>
+                <span class="logo-heading">CIBC CAPITAL MARKETS</span>
+              </div>
+              <div class="col-lg-5 col-sm-5 link-col padding-0 reg-links">
+                <div class="search-container">
+                  <input type="search" placeholder="Search"/>
+                  <img class="icon-search" src="assets/images/Search_Icon.png"/>
+                </div>
+                <a class="logo-row-link register" [routerLink]="'/register'">Register</a>
+                <a class="logo-row-link logo-row-link-border"
+                   href="http://crossleafdevelopment.com/loginrefresh/Login_Page.html">Sign On</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="links-container">
+          <div class="container">
+            <div class="row links-row">
+              <div class="col-lg-12 col-sm-12">
+                <!--<a class="link" href="#" [ngClass]="{'active': '/' === router.url || '' === router.url}">HOME</a>-->
+                <a class="link reports" href="#" (click)="openHeaderMenu($event)"
+                   [ngClass]="{'active': headerMenuOpened}">REPORTS</a>
+                <a class="link" href="#"
+                   [routerLink]="'/account'"
+                   [ngClass]="{'active': '/account' === router.url}">ACCOUNT</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="header-menus" [@openClose]="headerMenuOpened ? 'open' : 'closed'"
+             (clickOutside)="clickedOutSearch()">
+          <div class="container header-menus-container">
+            <div class="row ">
+              <div class="col-lg-3 col-sm-3 heading">
+                <span class="">
+                  REPORTS
+                </span>
+              </div>
+              <div class="col-lg-9 col-sm-9">
+                <div class="header-menu"><a class="links" [routerLink]="'/'">ABCP</a></div>
+                <div class="header-menu"><a class="links" [routerLink]="'/'">Term ABS</a></div>
+                <div class="header-menu"><a class="links" [routerLink]="'/'">Issuance Documents</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <ng-content class="header-content">
+    </ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

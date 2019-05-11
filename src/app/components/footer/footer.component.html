@@ -1,0 +1,97 @@
+<div class="footer-component">
+  <div class="container footer-container">
+    <div class="row first-row">
+      <div class="col-12 col-sm-6 col-md-6 col-lg-6 thick-text-col padding-0">
+        <span class="thick-text">CIBC Capital Markets Locations</span>
+      </div>
+      <div class="col-12 col-sm-6 col-md-6 col-lg-6 padding-0">
+        <div class="contact-us">
+          <button class="btn contact-us-btn">
+            Contact Us
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row second-row" [ngClass]="{'high-contrast': highContrast}">
+      <div
+        class="col-12 col-sm-{{footerLink.col}} col-md-{{footerLink.col}} col-lg-{{footerLink.col}} for-mobile-footer"
+        *ngFor="let footerLink of footerLinks">
+        <a href="#" class="footer-link mobile-drop-down {{footerLink.class}}"
+           (click)="toggleMobileFooterLinks(footerLink, $event)">
+          <div class="row">
+            <div class="col-9 col-sm-9 col-md-9 col-lg-9">{{footerLink.heading}}</div>
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3 dp-icon"></div>
+          </div>
+          <span></span>
+        </a>
+        <div class="for-mobile-drop-down-items-container" [ngClass]="{'opened': footerLink.opened}">
+          <a href="#" class="footer-link" *ngFor="let link of footerLink.links">{{link.name}} </a>
+        </div>
+      </div>
+      <div class="col-12 col-sm-3 col-md-3 col-lg-3 static-col">
+        <a href="#" class="footer-link important-heading">Personal Banking</a>
+        <a href="#" class="footer-link important-heading">Business Banking</a>
+        <a href="#" class="footer-link important-heading">About CIBC</a>
+        <a href="#" class="footer-link">Corporate Profile</a>
+        <a href="#" class="footer-link">Corporate Responsibility</a>
+        <a href="#" class="footer-link">Investor Relations</a>
+        <a href="#" class="footer-link">Media Centre</a>
+        <a href="#" class="footer-link">Careers</a>
+        <a href="#" class="footer-link">Canadian Imperial</a>
+        <div class="mobile-accessibility">
+          <a href="#" class="footer-link important-heading">Accessibility at CIBC</a>
+          <a href="#" class="footer-link icon-links">Contrast:
+            <img class="contrast-icon" src="assets/images/Minus.png" (click)="toggleContrast(false, $event)">
+            <img class="contrast-icon" src="assets/images/Plus.png" (click)="toggleContrast(true, $event)">
+          </a>
+          <a href="#" class="footer-link text-links">
+            <span class="">Text Size:</span>
+            <span class="action">Normal</span>
+            <span class="action active">High</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- last footer -->
+  <div class="last-row">
+    <div class="container footer-container">
+      <div class="row logo-text-row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 privacy-row">
+          <div class="mobile-privacy-row">
+            <a class="footer-link-privacy">Privacy & Security</a>
+            <a class="footer-link-privacy">CIBC Capital Markets Legal</a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-9 col-md-9 col-lg-9 footer-logo-section">
+          <div class="footer-logo">
+            <img src="assets/images/Footer_Logo.png">
+            <div class="mobile-social-section">
+              <i class="icofont icofont-social-facebook"></i>
+              <i class="icofont icofont-youtube-play"></i>
+              <i class="icofont icofont-social-twitter"></i>
+              <i class="icofont icofont-social-linkedin"></i>
+            </div>
+          </div>
+          <div class="connect-text">
+            Canadian Imperial Bank of Commerce Website - Copyright © CIBC.
+          </div>
+        </div>
+        <div class="col-12 col-sm-3 col-md-3 col-lg-3 social-section">
+          <i class="icofont icofont-social-facebook"></i>
+          <i class="icofont icofont-youtube-play"></i>
+          <i class="icofont icofont-social-twitter"></i>
+          <i class="icofont icofont-social-linkedin"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,148 @@
+@import '../../../styles/variables';
+
+.account {
+  ::ng-deep {
+    .mat-tab-group {
+      font-family: $CIBCLightRegularFont;
+      padding-right: 3px;
+    }
+    .mat-tab-body-content {
+      overflow: hidden !important;
+    }
+
+    .mat-tab-label {
+      @include not-mobile {
+        width: 33.33%;
+      }
+      opacity: 1 !important;
+      border-left: 1px solid $StrokeGrey;
+      border-top: 1px solid $StrokeGrey;
+      border-bottom: 1px solid $StrokeGrey;
+      height: 69px;
+
+      &:last-child{
+        border-right: 1px solid $StrokeGrey;
+      }
+
+    }
+    .mat-tab-label-content {
+      font-size: 17px;
+      font-family: $CIBCLightRegularFont;
+      color: $TextGrey;
+      letter-spacing: 2px;
+    }
+
+    .mat-tab-label-active {
+      border-top: 3px solid $CIBCBurgundy;
+      border-bottom: none;
+      .mat-tab-label-content {
+        color: $CIBCBurgundy;
+      }
+    }
+    .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+      display: none;
+    }
+    .mat-tab-header, .mat-tab-nav-bar {
+      border-bottom: none;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+  }
+  font-size: 16px;
+  line-height: 26px;
+
+  .account-main-col {
+    @include not-mobile {
+      /*padding-left: 30px;
+      padding-right: 30px;*/
+    }
+  }
+  .registration-container {
+    padding: 0 30px;
+
+    @include mobile {
+      padding: 0 15px;
+    }
+  }
+
+  .checkbox-section-col {
+    @include not-mobile{
+      padding-left: 10%;
+    }
+    @include mobile{
+      padding-top: 30px;
+    }
+  }
+
+  .title-row {
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    @include mobile {
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+  }
+  .para-2 {
+    font-family: $CIBCSemiBoldFont;
+  }
+  .step-3{
+    padding-top: 30px;
+  }
+  .change-pwd-container {
+    .top-row{
+      padding: 30px 0;
+    }
+    @include not-mobile {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  .right-col {
+    @include mobile {
+      padding-top: 20px;
+      padding-left: 15px;
+    }
+  }
+  .my-profile-form {
+    width: 99.5%;
+  }
+  .input-label {
+    font-family: $CIBCSemiBoldFont;
+  }
+
+  .next-row {
+    margin-top: 20px;
+    @include not-mobile{
+      padding-right: 8px;
+    }
+
+    .next-col {
+      text-align: right;
+    }
+    .update-col {
+      .app-button-primary {
+        padding: 10px 20px !important;
+      }
+    }
+
+    .previous-col {
+      text-align: left;
+
+      .app-button-secondary {
+        padding: 10px 50px;
+        font-family: $CIBCSemiBoldFont;
+      }
+    }
+  }
+
+  .check-box-row {
+    margin-bottom: 20px !important;
+
+    &:first-child {
+      margin-top: 0 !important;
+    }
+  }
+}
+
+

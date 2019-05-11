@@ -1,0 +1,271 @@
+<div class="account">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12 account-main-col">
+        <mat-tab-group>
+          <mat-tab label="MY PROFILE">
+            <div class="container registration-container change-pwd-container">
+              <div class="row title-row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                  <span class="component-heading">My Profile</span>
+                </div>
+              </div>
+              <div class="row">
+                <!--<div class="col-12 col-sm-4 col-md-4 col-lg-4">
+                  <p class="para-1">
+                    If you are a client of CIBC (CIBC, CIBC World Markets
+                    Inc., or CIBC Woody Gundy), an email can be sent to you
+                    whenever a report is published to the CIBC Economics
+                    website. to apply for this email service, please fill in this
+                    form and click Send.
+                  </p>
+                  <p class="para-2">
+                    Please note that you must include your CIBC sales
+                    contact person in the field below as this service is only
+                    offered to CIBC clients.
+                  </p>
+                </div>-->
+                <div class="col-12 col-sm-8 col-md-8 col-lg-8 right-col">
+                  <div class="step-2">
+                    <form [formGroup]="myProfileForm" class="my-profile-form" (ngSubmit)="onSubmitMyProfile()">
+                      <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                          <div class="form-group">
+                            <label class="input-label">First Name *</label>
+                            <input formControlName="firstName" class="app-text-box form-control"
+                                   [ngClass]="{ 'is-invalid': submittedMyProfile && fmp.firstName.errors }"
+                                   type="text" value="John"/>
+                            <div *ngIf="submittedMyProfile && fmp.firstName.errors" class="invalid-feedback">
+                              <div *ngIf="fmp.firstName.errors.required">First Name is required</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                          <div class="form-group">
+                            <label class="input-label">Last Name *</label>
+                            <input formControlName="lastName" class="app-text-box form-control"
+                                   [ngClass]="{ 'is-invalid': submittedMyProfile && fmp.lastName.errors }" type="text"/>
+                            <div *ngIf="submittedMyProfile && fmp.lastName.errors" class="invalid-feedback">
+                              <div *ngIf="fmp.lastName.errors.required">Last Name is required</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                          <div class="form-group">
+                            <label class="input-label select-label">Company *</label>
+                            <!--<ngx-select-dropdown [config]="config" [options]="companyDropdownOptions"
+                                                 [(ngModel)]="company" [multiple]="false"></ngx-select-dropdown>-->
+                            <div class="app-select-container">
+                              <select formControlName="company" class="app-select form-control"
+                                      [ngClass]="{ 'is-invalid': submittedMyProfile && fmp.company.errors }">
+                                <option *ngFor="let item of companyDropdownOptions" value={{item.id}} selected>{{item.name}}
+                                </option>
+                              </select>
+                              <span class="img-span">
+                                  <img class="img-col" src="assets/images/Icons_Chevron_Down.png">
+                              </span>
+                            </div>
+                            <div *ngIf="submittedMyProfile && fmp.company.errors" class="invalid-feedback">
+                              <div *ngIf="fmp.company.errors.required">Company is required</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                          <div class="form-group">
+                            <label class="input-label">Title</label>
+                            <input formControlName="title" class="app-text-box form-control"
+                                   [ngClass]="{ 'is-invalid': submittedMyProfile && fmp.title.errors }" type="text"/>
+                            <div *ngIf="submittedMyProfile && fmp.title.errors" class="invalid-feedback">
+                              <div *ngIf="fmp.title.errors.required">Title is required</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                          <div class="form-group">
+                            <label class="input-label">City *</label>
+                            <input formControlName="city" class="app-text-box form-control"
+                                   [ngClass]="{ 'is-invalid': submittedMyProfile && fmp.city.errors }" type="text"/>
+                            <div *ngIf="submittedMyProfile && fmp.city.errors" class="invalid-feedback">
+                              <div *ngIf="fmp.city.errors.required">City is required</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                          <div class="form-group">
+                            <label class="input-label select-label">Country *</label>
+                            <div class="app-select-container">
+                              <select formControlName="country" class="app-select form-control"
+                                      [ngClass]="{ 'is-invalid': submittedMyProfile && fmp.country.errors }">
+                                <option class="" value="" selected>Select a Country</option>
+                                <option *ngFor="let item of countryDropdownOptions" value={{item.id}}>{{item.name}}
+                                </option>
+                              </select>
+                              <span class="img-span">
+                                  <img class="img-col" src="assets/images/Icons_Chevron_Down.png">
+                              </span>
+                            </div>
+                            <div *ngIf="submittedMyProfile && fmp.country.errors" class="invalid-feedback">
+                              <div *ngIf="fmp.country.errors.required">Country is required</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                          <div class="form-group">
+                            <label class="input-label">Phone</label>
+                            <input formControlName="phone" class="app-text-box form-control"
+                                   [ngClass]="{ 'is-invalid': submittedMyProfile && fmp.phone.errors }" type="text"/>
+                            <div *ngIf="submittedMyProfile && fmp.phone.errors" class="invalid-feedback">
+                              <div *ngIf="fmp.phone.errors.required">Phone is required</div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                          <div class="form-group">
+                            <label class="input-label">Email</label>
+                            <input formControlName="email" class="app-text-box form-control"
+                                   [ngClass]="{ 'is-invalid': submittedMyProfile && fmp.email.errors }" type="text"/>
+                            <div *ngIf="submittedMyProfile && fmp.email.errors" class="invalid-feedback">
+                              <div *ngIf="fmp.email.errors.required">Email is required</div>
+                              <div *ngIf="fmp.email.errors.email">Email must be a valid email address</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="next-row row">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 previous-col">
+
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 next-col">
+                      <button class="app-button-primary m-t-10" (click)="onSubmitMyProfile()">Update Profile</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="CHANGE PASSWORD">
+            <div class="step-3">
+              <div class="container change-pwd-container">
+                <div class="row">
+                  <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+                    <span class="component-heading">
+                      Change Password
+                    </span>
+                  </div>
+                  <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="my-profile-form">
+                      <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                          <div class="form-group">
+                            <label class="input-label">Email Login</label>
+                            <input class="app-text-box disabled" type="text" value="name@company.com"/>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                          <div class="form-group">
+                            <label class="input-label">Current Password</label>
+                            <input class="app-text-box form-control"
+                                   formControlName="password"
+                                   [ngClass]="{ 'is-invalid': submitted && f.password.errors }" type="password"/>
+                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                              <div *ngIf="f.password.errors.required">Password is required</div>
+                              <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                          <div class="form-group">
+                            <label class="input-label">New Password *</label>
+                            <input class="app-text-box form-control"
+                                   formControlName="newPassword"
+                                   [ngClass]="{ 'is-invalid': submitted && f.newPassword.errors }"
+                                   type="password"/>
+                            <div *ngIf="submitted && f.newPassword.errors" class="invalid-feedback">
+                              <div *ngIf="f.newPassword.errors.required">New Password is required</div>
+                              <div *ngIf="f.newPassword.errors.mustMatch">Passwords must match with Confirm Password
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                          <div class="form-group">
+                            <label class="input-label">Confirm New Password</label>
+                            <input class="app-text-box form-control"
+                                   formControlName="confirmPassword"
+                                   [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
+                                   type="password"/>
+                            <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                              <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                              <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match with New Password
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="next-row row">
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-6 previous-col">
+
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-6 next-col update-col">
+                    <button class="app-button-primary m-t-10" (click)="onSubmit()">Update Password</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="EMAIL ALERTS">
+            <div class="container change-pwd-container">
+              <div class="row top-row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                  <span class="component-heading">
+                    Email Alerts
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+                  <div class="checkbox-section">
+                    Interested in receiving email alerts when a report is
+                    published to the Securitization research portal? As a
+                    CIBC, CIBC Capital Markets, and/or CIBC Woody Gundy
+                    client, you can include your alert preferences here.
+                  </div>
+                </div>
+                <div class="col-12 col-sm-8 col-md-8 col-lg-8 checkbox-section-col">
+                  <div class="checkbox-section">
+                    <div class="check-box-row m-t-25" *ngFor="let checkListItem of checkList">
+                      <mat-checkbox class="app-check-box" [(ngModel)]="checkListItem.checked">
+                        {{checkListItem.name}}
+                      </mat-checkbox>
+                    </div>
+                    <!--<div class="check-box-row m-t-25">
+                      <mat-checkbox class="app-check-box" (change)="selectionChanged()"
+                                    [(ngModel)]="allChecked">
+                        Unselect all
+                      </mat-checkbox>
+                    </div>-->
+                  </div>
+                  <div class="next-row row">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 previous-col">
+                      <button class="app-button-primary m-t-10">Save</button>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 next-col update-col">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+</div>
+

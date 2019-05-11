@@ -1,0 +1,459 @@
+<div class="registration">
+  <div class="container registration-container">
+    <div class="row title-row">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <span class="component-heading"></span>
+        <!--<span class="component-heading" [ngClass]="{'hidden': step !== 3}">Please create your login credentials</span>-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+        <p class="para-1">
+          All password protected research on this site is intended
+          strictly for usage by Corporate and Institutional Clients
+          of CIBC Capital Markets and is considered strictly
+          confidential and proprietary by CIBC Capital Markets.
+        </p>
+        <p class="para-2">
+          To obtain access to our proprietary research, please
+          complete the online registration below. Once your
+          registration has been approved, you will receive
+          confirmation with your username and password via email
+          within two business days.
+        </p>
+      </div>
+      <div class="col-12 col-sm-8 col-md-8 col-lg-8 right-col" id="form-section">
+        <div class="body-wrapper">
+          <div class="body" [ngClass]="{'active': step === 0 || step === 1}">
+            <div class="content"
+                 [ngClass]="{'transform-me-back': step === 0 || step === 1, 'transform-me-prev': step === 2}">
+              <div class="step-0-1 form-group" [ngClass]="{'hidden': step >= 2}">
+                <label class="input-label select-label">I am a:</label>
+                <!--<ngx-select-dropdown [config]="config" [options]="dropdownOptions"
+                                     [(ngModel)]="isUSClient" [multiple]="false"
+                                     (change)="onSelectionChanged($event)"></ngx-select-dropdown>-->
+                <div class="app-select-container">
+                  <select class="app-select" (change)="onSelectionChanged($event)">
+                    <option class="" value="" selected>Please Select</option>
+                    <option *ngFor="let item of dropdownOptions" value={{item.id}}>{{item.name}}</option>
+                  </select>
+                  <span class="img-span">
+                <img class="img-col" src="assets/images/Icons_Chevron_Down.png">
+            </span>
+                </div>
+              </div>
+              <div class="checkbox-section" [ngClass]="{'hidden': step != 1}">
+                <div class="check-box-row m-t-25" *ngFor="let checkListItem of checkList">
+                  <mat-checkbox class="app-check-box" [(ngModel)]="checkListItem.checked"
+                                (change)="onCheckListChanged()">
+                    {{checkListItem.name}}
+                  </mat-checkbox>
+                </div>
+              </div>
+              <div class="checkbox-section" [ngClass]="{'hidden': !showCheckList2}">
+                <div class="check-box-row m-t-25" *ngFor="let checkListItem2 of checkList2">
+                  <label class="check-box-label">{{checkListItem2.label}}</label>
+                  <mat-checkbox class="app-check-box" [(ngModel)]="checkListItem2.checked">
+                    {{checkListItem2.name}}
+                  </mat-checkbox>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-2 body-wrapper">
+          <form [formGroup]="registerForm" class="register-form body"
+                [ngClass]="{'active': step === 2}"
+                (ngSubmit)="onSubmit()" id="phase1">
+            <div class="form-label">My Details:</div>
+            <div class="row content"
+                 [ngClass]="{'transform-me-back': step === 2,
+              'transform-me-next': step === 1 , 'transform-me-prev': step === 3}">
+              <!--<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label class="input-label">I am a client of: *</label>
+                  &lt;!&ndash;<ngx-select-dropdown [config]="config" [options]="clientDropdownOptions"
+                                       [(ngModel)]="client" [multiple]="false"></ngx-select-dropdown>&ndash;&gt;
+                  <div class="app-select-container">
+                    <select formControlName="usClient" class="app-select form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.usClient.errors }">
+                      <option class="" value="" selected>Please Select</option>
+                      <option *ngFor="let item of clientDropdownOptions" value={{item.id}}>{{item.name}}</option>
+                    </select>
+
+                    <span class="img-span">
+                        <img class="img-col" src="assets/images/Icons_Chevron_Down.png">
+                    </span>
+                    <div *ngIf="submitted && f.usClient.errors" class="invalid-feedback">
+                      <div *ngIf="f.usClient.errors.required">Client of is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>-->
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">First Name *</label>
+                  <input formControlName="firstName" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" type="text"/>
+                  <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                    <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">Last Name *</label>
+                  <input formControlName="lastName" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" type="text"/>
+                  <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label select-label">Company *</label>
+                  <!--<ngx-select-dropdown [config]="config" [options]="companyDropdownOptions"
+                                       [(ngModel)]="company" [multiple]="false"></ngx-select-dropdown>-->
+                  <div class="app-select-container">
+                    <select formControlName="company" class="app-select form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.company.errors }">
+                      <option class="" value="" selected>Please Select</option>
+                      <option *ngFor="let item of companyDropdownOptions" value={{item.id}}>{{item.name}}</option>
+                    </select>
+                    <span class="img-span">
+                        <img class="img-col" src="assets/images/Icons_Chevron_Down.png">
+                    </span>
+                    <div *ngIf="submitted && f.company.errors" class="invalid-feedback">
+                      <div *ngIf="f.company.errors.required">Company is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">Title</label>
+                  <input formControlName="title" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submitted && f.title.errors }" type="text"/>
+                  <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                    <div *ngIf="f.title.errors.required">Title is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">City *</label>
+                  <input formControlName="city" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submitted && f.city.errors }" type="text"/>
+                  <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                    <div *ngIf="f.city.errors.required">City is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label select-label">Country *</label>
+                  <div class="app-select-container">
+                    <select formControlName="country" class="app-select form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
+                      <option class="" value="" selected>Please Select</option>
+                      <option *ngFor="let item of countryDropdownOptions" value={{item.id}}>{{item.name}}</option>
+                    </select>
+                    <span class="img-span">
+                        <img class="img-col" src="assets/images/Icons_Chevron_Down.png">
+                    </span>
+                    <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                      <div *ngIf="f.country.errors.required">Country is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">Phone</label>
+                  <input formControlName="phone" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" type="text"/>
+                  <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                    <div *ngIf="f.phone.errors.required">Phone is required</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">Email</label>
+                  <input formControlName="email" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submitted && f.email.errors }" type="text"/>
+                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">Transit</label>
+                  <input formControlName="transit" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submitted && f.transit.errors }" type="text"/>
+                  <div *ngIf="submitted && f.transit.errors" class="invalid-feedback">
+                    <div *ngIf="f.transit.errors.required">Transit is required</div>
+                  </div>
+                </div>
+              </div>-->
+            </div>
+          </form>
+
+          <form [formGroup]="registerFormClient" class="register-form body register-form-client"
+                [ngClass]="{'active': step === 2}"
+                (ngSubmit)="onSubmit()" id="client-form">
+            <div class="form-label">I am a client of:</div>
+            <div class="row content"
+                 [ngClass]="{'transform-me-back': step === 2,
+              'transform-me-next': step === 1 , 'transform-me-prev': step === 3}">
+              <!--<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label class="input-label">I am a client of: *</label>
+                  &lt;!&ndash;<ngx-select-dropdown [config]="config" [options]="clientDropdownOptions"
+                                       [(ngModel)]="client" [multiple]="false"></ngx-select-dropdown>&ndash;&gt;
+                  <div class="app-select-container">
+                    <select formControlName="usClient" class="app-select form-control"
+                            [ngClass]="{ 'is-invalid': submitted && fClient.usClient.errors }">
+                      <option class="" value="" selected>Please Select</option>
+                      <option *ngFor="let item of clientDropdownOptions" value={{item.id}}>{{item.name}}</option>
+                    </select>
+
+                    <span class="img-span">
+                        <img class="img-col" src="assets/images/Icons_Chevron_Down.png">
+                    </span>
+                    <div *ngIf="submitted && fClient.usClient.errors" class="invalid-feedback">
+                      <div *ngIf="fClient.usClient.errors.required">Client of is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>-->
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">First Name *</label>
+                  <input formControlName="firstName" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submitted && fClient.firstName.errors }" type="text"/>
+                  <div *ngIf="submitted && fClient.firstName.errors" class="invalid-feedback">
+                    <div *ngIf="fClient.firstName.errors.required">First Name is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">Last Name *</label>
+                  <input formControlName="lastName" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submitted && fClient.lastName.errors }" type="text"/>
+                  <div *ngIf="submitted && fClient.lastName.errors" class="invalid-feedback">
+                    <div *ngIf="fClient.lastName.errors.required">Last Name is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label select-label">Company *</label>
+                  <!--<ngx-select-dropdown [config]="config" [options]="companyDropdownOptions"
+                                       [(ngModel)]="company" [multiple]="false"></ngx-select-dropdown>-->
+                  <div class="app-select-container">
+                    <select formControlName="company" class="app-select form-control"
+                            [ngClass]="{ 'is-invalid': submitted && fClient.company.errors }">
+                      <option class="" value="" selected>Please Select</option>
+                      <option *ngFor="let item of companyDropdownOptions" value={{item.id}}>{{item.name}}</option>
+                    </select>
+                    <span class="img-span">
+                        <img class="img-col" src="assets/images/Icons_Chevron_Down.png">
+                    </span>
+                    <div *ngIf="submitted && fClient.company.errors" class="invalid-feedback">
+                      <div *ngIf="fClient.company.errors.required">Company is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">Title</label>
+                  <input formControlName="title" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submitted && fClient.title.errors }" type="text"/>
+                  <div *ngIf="submitted && fClient.title.errors" class="invalid-feedback">
+                    <div *ngIf="fClient.title.errors.required">Title is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">City *</label>
+                  <input formControlName="city" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submitted && fClient.city.errors }" type="text"/>
+                  <div *ngIf="submitted && fClient.city.errors" class="invalid-feedback">
+                    <div *ngIf="fClient.city.errors.required">City is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label select-label">Country *</label>
+                  <div class="app-select-container">
+                    <select formControlName="country" class="app-select form-control"
+                            [ngClass]="{ 'is-invalid': submitted && fClient.country.errors }">
+                      <option class="" value="" selected>Please Select</option>
+                      <option *ngFor="let item of countryDropdownOptions" value={{item.id}}>{{item.name}}</option>
+                    </select>
+                    <span class="img-span">
+                        <img class="img-col" src="assets/images/Icons_Chevron_Down.png">
+                    </span>
+                    <div *ngIf="submitted && fClient.country.errors" class="invalid-feedback">
+                      <div *ngIf="fClient.country.errors.required">Country is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">Phone</label>
+                  <input formControlName="phone" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submitted && fClient.phone.errors }" type="text"/>
+                  <div *ngIf="submitted && fClient.phone.errors" class="invalid-feedback">
+                    <div *ngIf="fClient.phone.errors.required">Phone is required</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">Email</label>
+                  <input formControlName="email" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submitted && fClient.email.errors }" type="text"/>
+                  <div *ngIf="submitted && fClient.email.errors" class="invalid-feedback">
+                    <div *ngIf="fClient.email.errors.required">Email is required</div>
+                    <div *ngIf="fClient.email.errors.email">Email must be a valid email address</div>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">Transit</label>
+                  <input formControlName="transit" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submitted && fClient.transit.errors }" type="text"/>
+                  <div *ngIf="submitted && fClient.transit.errors" class="invalid-feedback">
+                    <div *ngIf="fClient.transit.errors.required">Transit is required</div>
+                  </div>
+                </div>
+              </div>-->
+            </div>
+          </form>
+        </div>
+        <div class="step-3 body-wrapper">
+          <form [formGroup]="registerFormPart2" class="register-form body"
+                [ngClass]="{'active': step === 3}"
+                (ngSubmit)="onSubmitPart2()" id="phase2">
+            <div class="row content animated-div" [ngClass]="{'transform-me-back': step === 3,
+              'transform-me-next': step === 2, 'transform-me-prev': step === 4}">
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">Username</label>
+                  <!--<input formControlName="email" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submittedPart2 && fPart2.email.errors }"
+                         type="text"/>-->
+                  <input class="app-text-box disabled" type="text" value="name@company.com"/>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <!--<div class="form-group">
+                  <label class="input-label">Re-type Email *</label>
+                  <input formControlName="reEmail" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submittedPart2 && fPart2.reEmail.errors }"
+                         type="text"/>
+                  <div *ngIf="submittedPart2 && fPart2.reEmail.errors" class="invalid-feedback">
+                    <div *ngIf="fPart2.reEmail.errors.required">Confirmation Email is required</div>
+                    <div *ngIf="fPart2.reEmail.errors.mustMatch">Confirmation Email must match with Email</div>
+                    <div *ngIf="fPart2.reEmail.errors.email">Email must be a valid email address</div>
+                  </div>
+                </div>-->
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">Password *</label>
+                  <input formControlName="password" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submittedPart2 && fPart2.password.errors }"
+                         type="password"/>
+                  <div *ngIf="submittedPart2 && fPart2.password.errors" class="invalid-feedback">
+                    <div *ngIf="fPart2.password.errors.required">Password is required</div>
+                    <div *ngIf="fPart2.password.errors.minlength">Password must be at least 6 characters</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">Re-type Password *</label>
+                  <input formControlName="confirmPassword" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submittedPart2 && fPart2.confirmPassword.errors }"
+                         type="password"/>
+                  <div *ngIf="submittedPart2 && fPart2.confirmPassword.errors" class="invalid-feedback">
+                    <div *ngIf="fPart2.confirmPassword.errors.required">Confirm Password is required</div>
+                    <div *ngIf="fPart2.confirmPassword.errors.mustMatch">Passwords must match with New Password</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="step-4 body-wrapper">
+          <div class="body" [ngClass]="{'active': step === 4}">
+            <div class="row content animated-div" [ngClass]="{'transform-me-back': step === 4,
+              'transform-me-next': step === 3, 'transform-me-prev': step === 5}">
+              <div class="col-12 col-sm-8 col-md-8 col-lg-8 m-t-10">
+                <div class="reg-success">
+                  <i class="icofont icofont-check-circled"></i>
+                  Registration Completed with Success.
+                </div>
+              </div>
+              <div class="col-12 col-sm-8 col-md-8 col-lg-8 m-t-10 reg-success-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu ipsum
+                arcu. Pellentesque at quam venenatis, gravida purus quis, volutpat libero.
+                Mauris malesuada vestibulum fermentum.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="next-row row" [ngClass]="{'hidden': step > 3}">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6 previous-col">
+            <button class="app-button-secondary m-t-10" (click)="goPrevious()"
+                    [ngClass]="{'hidden': step < 2}">Previous
+            </button>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6 next-col">
+            <button class="app-button-primary m-t-10"
+                    [ngClass]="{'hidden': step > 2, 'disabled': nextDisabled && step === 1}" (click)="goNext()">Next
+            </button>
+            <button class="app-button-primary m-t-10"
+                    [ngClass]="{'hidden': step < 3}" (click)="onSubmitPart2()">Register
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #modal="bs-modal"
+     tabindex="-1" role="dialog" aria-labelledby="dialog-events-name">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h6 class="modal-title pull-left">{{title}}</h6>
+        <p class="details">
+          As a ‘U.S. person’ as defined in Regulation S of the United
+          States Securities Act of 1933, you are ineligible to create
+          an account with CIBC-sponsored Asset-Backed
+          Commercial Paper Conduits.
+        </p>
+        <div class="actions">
+          <button class="app-button-secondary" (click)="closeModal()">Close and Return</button>
+          <button class="app-button-primary" (click)="closeModal()">Exit Site</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

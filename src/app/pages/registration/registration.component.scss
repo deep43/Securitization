@@ -1,0 +1,171 @@
+@import '../../../styles/variables';
+
+$delay: .3s;
+
+.registration {
+  font-size: 16px;
+  line-height: 26px;
+  .registration-container {
+    padding: 0 30px;
+  }
+  .checkbox-section{
+    padding-left: 4px
+  }
+  .title-row {
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    @include mobile {
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+  }
+  .para-1 {
+    font-family: $CIBCSemiBoldFont;
+  }
+  .right-col {
+    padding-left: 10%;
+    @include mobile {
+      padding-top: 20px;
+      padding-left: 15px;
+    }
+  }
+  .transform-me-prev {
+    transform: translate3d(-100%, 0px, 0px) !important;
+    transition: transform $delay ease-in-out;
+  }
+  .transform-me-next {
+    transform: translate3d(100%, 0px, 0px) !important;
+    transition: transform $delay ease-in-out;
+  }
+  .transform-me-back {
+    transform: none !important;
+    transition: transform $delay ease-in-out;
+  }
+  .animated-div {
+    transform: translate3d(-100%, 0px, 0px);
+  }
+  .body-wrapper {
+    overflow-x: hidden;
+    overflow-y: auto;
+    //display: flex;
+    position: relative;
+
+    .body {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+      display: block;
+      overflow: hidden;
+      flex-basis: 100%;
+
+      &.active {
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: auto;
+        z-index: 1;
+        flex-grow: 1;
+      }
+    }
+  }
+
+  .register-form {
+    width: 100%;
+    display: block;
+  }
+  .register-form-client {
+    @include not-mobile {
+      padding-top: 30px;
+    }
+  }
+
+  .reg-success-text {
+    font-size: 13px;
+    padding: 0 40px;
+  }
+
+  .reg-success {
+    background-color: rgba(77, 255, 248, 0.15);
+    padding: 20px 15px;
+
+    i {
+      color: green;
+    }
+  }
+  .input-label {
+    font-family: $CIBCSemiBoldFont;
+    display: block;
+  }
+
+  .next-row {
+    margin-top: 20px;
+    padding: 0 3px;
+
+    .next-col {
+      text-align: right;
+    }
+
+    .previous-col {
+      text-align: left;
+
+      .app-button-secondary {
+        padding: 10px 50px;
+        font-family: $CIBCSemiBoldFont;
+      }
+    }
+  }
+  .check-box-row {
+    margin-bottom: 20px !important;
+
+    ::ng-deep .check-box-label {
+      font-family: WhitneySemibold;
+    }
+  }
+}
+
+.modal {
+  text-align: center;
+
+  .modal-title {
+    color: $CIBCBurgundy;
+    letter-spacing: 2px;
+    margin: 20px;
+    @include mobile {
+      margin: 8px 0 20px 0;
+    }
+  }
+
+  .modal-lg, .modal-xl {
+    top: 22%;
+    @include not-mobile {
+      width: 400px !important;
+    }
+  }
+
+  .details {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .app-button-primary {
+    padding: 10px 20px !important;
+  }
+
+  .app-button-secondary {
+    margin-right: 20px;
+  }
+
+}
+
+.modal-body {
+  padding: 30px;
+  @include mobile {
+    padding: 40px;
+  }
+}
+
+.modal {
+  background: rgba(0, 0, 0, 0.62);
+}

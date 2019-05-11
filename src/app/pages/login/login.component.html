@@ -1,0 +1,66 @@
+<div class="Login_Wrapper">
+  <div class="Login_Overlay"></div>
+  <div class="Login_Container">
+    <div class="Login_InnContainer">
+      <div class="Login_Header">Login</div>
+      <div class="ErrorMessage"><span class="fa fa-exclamation-circle"></span><span class="text">Either username or password is wrong</span>
+      </div>
+      <div class="Login_Body">
+        <!--<form class="example-form">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Email" [formControl]="emailFormControl"
+                   [errorStateMatcher]="matcher">
+            <mat-hint>Errors appear instantly!</mat-hint>
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+
+          </mat-form-field>
+        </form>-->
+        <form class="example-form" (ngSubmit)="onSubmit()" id="phase2">
+          <div class="app-mat-form-field">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Username" value="" [formControl]="uNameFormControl"
+                     [errorStateMatcher]="matcher">
+              <mat-error *ngIf="uNameFormControl.hasError('required')">
+                Username is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="app-mat-form-field">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Password" value="" type="password" [formControl]="uPwdFormControl"
+                     [errorStateMatcher]="matcher">
+              <mat-error *ngIf="uPwdFormControl.hasError('required')">
+                Password is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="ActionZone">
+            <div class="Action_left">
+              <mat-checkbox class="app-check-box">
+                Remember Me
+              </mat-checkbox>
+            </div>
+            <div class="Action_right">
+              <div class="frgt_pwd"><a [routerLink]="'/forgotpassword'">Forgot Your Password?</a></div>
+              <div class="frgt_usn"><a [routerLink]="'/forgotusername'">Forgot Your Username?</a></div>
+            </div>
+          </div>
+
+          <button class="Signin" type="submit">Sign In</button>
+        </form>
+
+      </div>
+      <div class="Login_Foo">
+        <div class="Foo_left">
+          <div>Return</div>
+          <div><a [routerLink]="'/login'">Back to CIBC.com</a></div>
+        </div>
+        <div class="Foo_right"><img src="/assets/images/Footer_Logo.png"></div>
+      </div>
+    </div>
+  </div>
+  <div class="Login_footer"><img src="/assets/images/Footer_Logo.png"><span>Canadian Imperial Bank of Commerce Website. Copyright &copy; CIBC
+            </span></div>
+</div>

@@ -1,0 +1,66 @@
+@import '../../../styles/variables';
+
+.disclaimer{
+  background: #f5f5f5;
+  margin-top: 30px;
+
+  .container{
+    @include mobile{
+      padding: 0 30px;
+    }
+  }
+  .text-container{
+    max-height: 0;
+    transition: max-height 0.4s ease-out;
+    overflow: hidden;
+  }
+  .title{
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .dis-container{
+    cursor: pointer;
+    @include not-mobile{
+      padding: 0 30px;
+    }
+    &:hover{
+      color: $CIBCBurgundy;
+    }
+    .row{
+      padding: 15px 0;
+    }
+  }
+  .image-col{
+    text-align: right;
+    padding: 0;
+
+    @include mobile{
+      padding-right: 15px;
+    }
+  }
+
+  &.opened{
+    .dis-container{
+      color: $CIBCBurgundy;
+    }
+    .image-col{
+      img{
+        transform: rotate(180deg);
+      }
+    }
+    .text-container {
+      @include not-mobile{
+        padding-right: 30px;
+        padding-left: 30px;
+      }
+      padding-top: 20px;
+      border-top: 2px solid white;
+      max-height: 600px;
+      transition: max-height 0.4s ease-in;
+
+      @include mobile{
+        max-height: 2100px;
+      }
+    }
+  }
+}

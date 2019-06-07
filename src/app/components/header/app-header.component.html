@@ -1,19 +1,17 @@
 <mat-sidenav-container class="sidenav-container" (scroll)="onWindowScroll($event);">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
-               [ngClass]="{hidden: !(isHandset$ | async)}"
-               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-               [mode]="(isHandset$ | async) ? 'over' : 'side'">
+               [ngClass]="{hidden: !(isHandset$.matches)}"
+               [attr.role]="(isHandset$.matches) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$.matches) ? 'over' : 'side'" [autoFocus]="false">
     <!--<mat-toolbar>Menu</mat-toolbar>-->
     <mat-nav-list>
-      <a mat-list-item class="mobile-menu-link navigation-bar">
-        <!--<i class="icofont icofont-home"></i>
-        Navigation
-        <i class="icofont icofont-close close-nav"
-           (click)="drawer.toggle()"></i>-->
-        <input placeholder="Search" class="mobile-search" type="text">
-      </a>
-      <a mat-list-item href="#" class="mobile-menu-link">HOME</a>
-      <a mat-list-item href="#" class="mobile-menu-link reports" (click)="onReportClick($event)">REPORTS
+      <!--<a mat-list-item class="mobile-menu-link navigation-bar search-bar">
+        <input placeholder="Search" class="mobile-search" type="text" >
+        <i class="ti-search search-icon"></i>
+      </a>-->
+      <a mat-list-item href="#" class="mobile-menu-link"
+         [routerLink]="'/'" (click)="toggleDrawer()">HOME</a>
+      <a mat-list-item href="#" class="mobile-menu-link reports" (click)="onReportClick($event)">DOCUMENTS
         <i class="icofont icofont-thin-right" [ngClass]="{'hidden': reportMenuOpened}"></i>
         <i class="icofont icofont-thin-down" [ngClass]="{'hidden': !reportMenuOpened}"></i>
         <div class="reports-menu" [@openCloseReports]="reportMenuOpened ? 'open' : 'closed'">
@@ -34,21 +32,33 @@
           <div class="col-6"><a class="sign-on" href="http://crossleafdevelopment.com/loginrefresh/Login_Page.html">Sign
             On</a></div>
         </div>
+        <div class="row">
+          <div class="col-12 padding-0 padding-0-mobile">
+            Special Offers
+          </div>
+          <div class="col-12 padding-0 padding-0-mobile">
+            <a href="#" class="link">CIBC Capital Market</a>
+            <a href="#" class="link">CIBC Website</a>
+          </div>
+        </div>
       </div>
-      <div class="special-offers">
+      <!--<div class="special-offers">
         Special Offers
       </div>
       <a href="#" class="link">CIBC Capital Market</a>
-      <a href="#" class="link">CIBC Website</a>
+      <a href="#" class="link">CIBC Website</a>-->
     </div>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content [ngClass]="{'sidebar-opened': toggleSideNav}">
     <mat-toolbar color="primary" class="header-toolbar">
-      <div *ngIf="isHandset$ | async" class="mobile-toolbar">
+      <div *ngIf="isHandset$.matches" class="mobile-toolbar">
         <div class="handset-logo">
           <a [routerLink]="'/'">
             <img class="footer-logo-image" src="assets/images/Footer_Logo.png" alt="CIBC">
-            <span class="mobile-logo-heading">CIBC CAPITAL MARKETS</span>
+            <div class="mobile-menu-heading">
+              <span class="mobile-logo-heading">CIBC CAPITAL MARKETS</span>
+              <span class="mobile-logo-heading-2">Securitization</span>
+            </div>
           </a>
         </div>
         <!--<div class="handset-sign-on">
@@ -65,7 +75,7 @@
         </button>-->
         <button type="button"
                 aria-label="Toggle sidenav"
-                (click)="toggleDrawer()"
+                (click)="toggleDrawer($event)"
                 class="black-iocn hamburger hamburger--collapse" [ngClass]="{'is-active': toggleSideNav}">
           <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -73,7 +83,7 @@
         </button>
       </div>
       <!--<div class="mobile-dropdown-menu"
-           [ngClass]="{hidden: !(isHandset$ | async), shown: toggleDropdown}">
+           [ngClass]="{hidden: !(isHandset$.matches), shown: toggleDropdown}">
         <a [routerLink]="'/register'" class="dropdown-menu-item" (click)="toggleMobileDropdown()">
           <i class="icofont icofont-ui-contact-list"></i>
           <div class="item-text">Register</div>
@@ -84,7 +94,7 @@
         </a>
       </div>-->
 
-      <div [ngClass]="{hidden: (isHandset$ | async)}" class="menu-row" id="menu-row">
+      <div [ngClass]="{hidden: (isHandset$.matches)}" class="menu-row" id="menu-row">
         <div class="container">
           <div class="row">
             <div class="col-lg-12 cibc-flex-col">
@@ -94,7 +104,7 @@
           </div>
         </div>
       </div>
-      <div id="sticky-header" class="main-header" [ngClass]="{hidden: (isHandset$ | async)}">
+      <div id="sticky-header" class="main-header" [ngClass]="{hidden: (isHandset$.matches)}">
         <div class="logo-row-container">
           <div class="container">
             <div class="logo-row">
@@ -104,12 +114,13 @@
                        alt="CIBC">
                 </a>
                 <span class="logo-heading">CIBC CAPITAL MARKETS</span>
+                <span class="logo-heading-2">Securitization</span>
               </div>
-              <div class="col-lg-5 col-sm-5 link-col padding-0 reg-links">
-                <div class="search-container">
+              <div class="col-lg-5 col-sm-5 link-col reg-links">
+                <!--<div class="search-container">
                   <input type="search" placeholder="Search"/>
                   <img class="icon-search" src="assets/images/Search_Icon.png"/>
-                </div>
+                </div>-->
                 <a class="logo-row-link register" [routerLink]="'/register'">Register</a>
                 <a class="logo-row-link logo-row-link-border"
                    href="http://crossleafdevelopment.com/loginrefresh/Login_Page.html">Sign On</a>
@@ -123,7 +134,7 @@
               <div class="col-lg-12 col-sm-12">
                 <!--<a class="link" href="#" [ngClass]="{'active': '/' === router.url || '' === router.url}">HOME</a>-->
                 <a class="link reports" href="#" (click)="openHeaderMenu($event)"
-                   [ngClass]="{'active': headerMenuOpened}">REPORTS</a>
+                   [ngClass]="{'active': headerMenuOpened}">DOCUMENTS</a>
                 <a class="link" href="#"
                    [routerLink]="'/account'"
                    [ngClass]="{'active': '/account' === router.url}">ACCOUNT</a>
@@ -132,15 +143,15 @@
           </div>
         </div>
         <div class="header-menus" [@openClose]="headerMenuOpened ? 'open' : 'closed'"
-             (clickOutside)="clickedOutSearch()">
+             (clickOutside)="clickedOutSearch($event)">
           <div class="container header-menus-container">
             <div class="row ">
-              <div class="col-lg-3 col-sm-3 heading">
+              <div class="col-lg-3 col-sm-4 heading">
                 <span class="">
-                  REPORTS
+                  DOCUMENTS
                 </span>
               </div>
-              <div class="col-lg-9 col-sm-9">
+              <div class="col-lg-9 col-sm-8">
                 <div class="header-menu"><a class="links" [routerLink]="'/'">ABCP</a></div>
                 <div class="header-menu"><a class="links" [routerLink]="'/'">Term ABS</a></div>
                 <div class="header-menu"><a class="links" [routerLink]="'/'">Issuance Documents</a></div>

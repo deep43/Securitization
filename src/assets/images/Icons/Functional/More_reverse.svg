@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>More</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Working" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M0,10 C0,4.477 4.48,0 10,0 C15.52,0 20,4.477 20,10 C20,15.523 15.52,20 10,20 C4.48,20 0,15.523 0,10 Z M10.83,10.833 L15,10.833 C15.46,10.833 15.83,10.461 15.83,10 C15.83,9.539 15.46,9.167 15,9.167 L10.83,9.167 L10.83,5 C10.83,4.539 10.46,4.167 10,4.167 C9.54,4.167 9.17,4.539 9.17,5 L9.17,9.167 L5,9.167 C4.54,9.167 4.17,9.539 4.17,10 C4.17,10.461 4.54,10.833 5,10.833 L9.17,10.833 L9.17,15 C9.17,15.461 9.54,15.833 10,15.833 C10.46,15.833 10.83,15.461 10.83,15 L10.83,10.833 Z" id="More" fill="#FFFFFF"></path>
+    </g>
+</svg>

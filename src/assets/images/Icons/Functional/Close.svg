@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Icons / Functional / Close</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="11.3 0 6 5.301 0.698 0 0 0.698 5.301 5.999 0 11.3 0.698 12 6 6.699 11.3 12 11.999 11.3 6.698 5.999 11.999 0.698"></polygon>
+    </defs>
+    <g id="Desktop-Admin" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="7.1-Publishing-Administation-/-Report-types-/-Add-or-Edit" transform="translate(-1070.000000, -156.000000)">
+            <g id="Icons-/-Functional-/-Close" transform="translate(1070.000000, 156.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Path" fill="#8B1D41" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

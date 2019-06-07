@@ -1,5 +1,5 @@
-<div class="banner" [ngClass]="{'on-mobile': (isHandset$ | async)}">
-  <div class="image-conatiner">
+<div class="banner" [ngClass]="{'on-mobile': (!isHandset$ | async)}">
+  <div class="image-conatiner" [ngClass]="{'loaded': pageLoaded}">
     <!--<img src="assets/images/Background.jpg">-->
     <ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows"
                   [showNavigationIndicators]="showNavigationIndicators">
@@ -11,7 +11,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12 col-sm-12 col-md-12 col-lg-12 banner-title">
-        <div class="app-title">SECURITIZATION</div>
+        <!--<div class="app-title">SECURITIZATION</div>-->
         <div>{{bannerTitle}}</div>
       </div>
     </div>

@@ -112,10 +112,12 @@
                         <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
                           <div class="form-group">
                             <label class="input-label">Phone</label>
-                            <input formControlName="phone" class="app-text-box form-control"
+                            <input appPhoneMask formControlName="phone" class="app-text-box form-control"
+                                   pattern="^\(([0-9]{3})\)[ ]([0-9]{3})[-]([0-9]{4})$" maxlength="14"
                                    [ngClass]="{ 'is-invalid': submittedMyProfile && fmp.phone.errors }" type="text"/>
                             <div *ngIf="submittedMyProfile && fmp.phone.errors" class="invalid-feedback">
                               <div *ngIf="fmp.phone.errors.required">Phone is required</div>
+                              <div *ngIf="fmp.phone.errors.pattern">Format should be: (111) 111-1111</div>
                             </div>
                           </div>
                         </div>

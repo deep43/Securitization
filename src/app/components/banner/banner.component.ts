@@ -15,15 +15,16 @@ export class BannerComponent implements OnInit {
   bannerTitle = 'ASSET-BACKED COMMERCIAL PAPER (ABCP)';
   showNavigationArrows = false;
   showNavigationIndicators = false;
+  pageLoaded = false;
   images = [
-    'assets/images/new_banner_images/nova.jpg',
-    'assets/images/new_banner_images/Quebec.jpg',
-    'assets/images/new_banner_images/Quebec2.jpg',
-    'assets/images/new_banner_images/toronto.jpg',
-    'assets/images/new_banner_images/toronto4.jpg',
-    'assets/images/new_banner_images/vancouver.jpg',
-    'assets/images/new_banner_images/vancouver2.jpg'
+    'assets/images/Banner/calgary2x.jpg',
+    'assets/images/Banner/montreal2x.jpg',
+    'assets/images/Banner/ottawa2x.jpg',
+    'assets/images/Banner/toronto2x.jpg',
+    'assets/images/Banner/vancouver2x.jpg',
+    'assets/images/Banner/winnipeg2x.jpg',
   ];
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
@@ -46,6 +47,9 @@ export class BannerComponent implements OnInit {
   }
 
   ngOnInit() {
+    setTimeout(()=>{
+      this.pageLoaded = true;
+    }, 800);
   }
 
 }

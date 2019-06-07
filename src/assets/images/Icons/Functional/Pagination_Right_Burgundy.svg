@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="14px" viewBox="0 0 12 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Pagination_Right_Burgundy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M6.59,6.999 L0,0 L1.41,0 L8,6.999 L1.41,13.998 L0,13.998 L6.59,6.999 Z M10.59,6.999 L4,0 L5.41,0 L12,6.999 L5.41,13.998 L4,13.998 L10.59,6.999 Z" id="path-1"></path>
+    </defs>
+    <g id="Working" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons-/-Functional-/-Pagination-Right">
+            <g id="Clipped">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Shape"></g>
+                <rect id="Rectangle" fill="#8B1D41" mask="url(#mask-2)" x="-2" y="-1" width="16" height="16"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

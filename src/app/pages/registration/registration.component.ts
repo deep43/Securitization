@@ -2,11 +2,30 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {BsModalService, ModalDirective} from 'ngx-bootstrap';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MustMatch} from '../../helpers/must-match.validator';
+import {validate} from 'codelyzer/walkerFactory/walkerFn';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  styleUrls: ['./registration.component.scss'],
+  animations: [
+    trigger('openClose', [
+      // ...
+      state('open', style({
+        maxHeight: '276px',
+      })),
+      state('closed', style({
+        maxHeight: '0px',
+      })),
+      transition('open => closed', [
+        animate('3s')
+      ]),
+      transition('closed => open', [
+        animate('3s')
+      ]),
+    ]),
+  ]
 })
 export class RegistrationComponent implements OnInit {
   @ViewChild('modal') modal: ModalDirective;
@@ -17,7 +36,7 @@ export class RegistrationComponent implements OnInit {
   submittedPart2 = false;
   nextDisabled = true;
   showCheckList2 = false;
-  step = 0;
+  step = 3;
   config = {
     displayKey: 'name',
     search: false,
@@ -29,7 +48,7 @@ export class RegistrationComponent implements OnInit {
     {id: 1, name: 'U.S. Client'},
   ];
   title = 'SORRY, YOU ARE INELIGIBLE';
-
+  regSuccessNotificationOpened = false;
   checkList = [
     {id: 1, checked: false, name: 'I am a ‘U.S. person’ as defined in Regulation S of the United States Securities Act of 1933'},
     {
@@ -62,7 +81,7 @@ export class RegistrationComponent implements OnInit {
 
   company;
   companyDropdownOptions = [
-    {id: 1, name: 'CIBC Capital Markets'},
+    {id: 1, name: 'CIBC'},
   ];
 
   country;
@@ -86,7 +105,7 @@ export class RegistrationComponent implements OnInit {
       lastName: ['', Validators.required],
       city: ['', Validators.required],
       title: ['', Validators.required],
-      //transit: ['', Validators.required],
+      userName: ['', Validators.required],
       phone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
     }, {
@@ -96,16 +115,19 @@ export class RegistrationComponent implements OnInit {
     this.registerFormClient = this.formBuilder.group({
       //usClient: ['', Validators.required],
       company: ['', Validators.required],
-      country: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      city: ['', Validators.required],
+      /*city: ['', Validators.required],
       title: ['', Validators.required],
-      //transit: ['', Validators.required],
-      phone: ['', Validators.required],
+      country: ['', Validators.required],
+      transit: ['', Validators.required],
+      phone: ['', Validators.required ],*/
       email: ['', [Validators.required, Validators.email]],
     }, {
       //validator: MustMatch('password', 'confirmPassword')
+    });
+    this.registerFormClient.patchValue({
+      company: "1",
     });
 
     this.registerFormPart2 = this.formBuilder.group({
@@ -135,7 +157,8 @@ export class RegistrationComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.registerForm.invalid && this.registerFormClient.invalid) {
+    if (this.registerForm.invalid || this.registerFormClient.invalid) {
+      console.log(this.f.phone.errors);
       return;
     }
 
@@ -151,6 +174,14 @@ export class RegistrationComponent implements OnInit {
     }
 
     this.step += 1;
+    this.goToTopSection();
+    if(this.step === 4){
+      this.regSuccessNotificationOpened = true;
+
+      setTimeout(()=>{
+        this.closeRegSuccessNotification();
+      }, 5000)
+    }
     return true;
   }
 
@@ -170,6 +201,11 @@ export class RegistrationComponent implements OnInit {
       this.nextDisabled = true;
       this.step = 1;
     }
+  }
+
+  goToTopSection(){
+    let elmnt = document.getElementById("form-section");
+    window.scrollTo(elmnt.scrollLeft, elmnt.scrollTop+300)
   }
 
   closeModal() {
@@ -215,16 +251,74 @@ export class RegistrationComponent implements OnInit {
     this.step += 1;
 
     if(this.step > 1){
-      setTimeout(()=>{
-        let elmnt = document.getElementById("form-section");
-        // window.scrollTo(elmnt.scrollLeft, elmnt.scrollTop+300, behavior: 'smooth')
-        window.scrollTo(elmnt.scrollLeft, elmnt.scrollTop+300)
-      }, 1000);
-
+      this.goToTopSection();
     }
+  }
+
+  closeRegSuccessNotification(){
+    this.regSuccessNotificationOpened = false;
   }
 
   goPrevious() {
     this.step -= 1;
+    if(this.step > 0){
+      this.goToTopSection();
+    }
   }
+
+  /*onPhoneKeyDown(event) {
+
+    event.preventDefault();
+    let key = event.key;
+
+    if(Number(key) === 0){
+      phoneNumber = phoneNumber.concat('0');
+      updateInput();
+    }
+
+    if(!Number(key) && key !== 'Backspace' && Number(key) !== 0){
+      return false;
+    }
+
+    if(Number(key) && phoneNumber.length < 10){
+      phoneNumber = phoneNumber.concat(key);
+      updateInput();
+    }
+
+    if( key === 'Backspace' ){
+      phoneNumber = phoneNumber.slice(0, -1);
+      updateInput();
+    }
+  };
+
+  updateInput(){
+    let arr = [];
+
+    for(let i = 0; i < 10; i++){
+      if(phoneNumber[i]){
+        arr.push(phoneNumber[i]);
+      }
+      else{
+        arr.push(' ');
+      }
+    }
+
+    numberField.value = `(${arr.slice(0,3).join('')}) ${arr.slice(3,6).join('')}-${arr.slice(6,10).join('')}`;
+    focus();
+  }
+
+  focus(){
+    let focusNumber = 0;
+    if(phoneNumber.length < 3 && phoneNumber.length >= 1){
+      focusNumber = phoneNumber.length + 1;
+    }
+    else if(phoneNumber.length < 6){
+      focusNumber = phoneNumber.length + 3;
+    }
+    else{
+      focusNumber = phoneNumber.length + 4;
+    }
+    if(phoneNumber.length === 10) focusNumber = 14;
+    numberField.setSelectionRange(focusNumber, focusNumber);
+  }*/
 }

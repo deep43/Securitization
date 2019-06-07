@@ -10,9 +10,19 @@
     }
   }
   .text-container{
+    @include not-mobile{
+      padding-right: 33px;
+      padding-left: 30px;
+    }
+    //line-height: 1.29;
     max-height: 0;
-    transition: max-height 0.4s ease-out;
+    transition: max-height 0.4s ease-out, padding 0.5s;
     overflow: hidden;
+    font-family: $CIBCCondensedFont;
+
+    p{
+      margin-bottom: 18px;
+    }
   }
   .title{
     text-transform: uppercase;
@@ -32,10 +42,18 @@
   }
   .image-col{
     text-align: right;
-    padding: 0;
+    padding-right: 25px;
 
     @include mobile{
       padding-right: 15px;
+      padding-left: 0;
+    }
+  }
+
+  .divider{
+    @include not-mobile{
+      border-top: 2px solid white;
+      margin: 0 23px 0 15px;
     }
   }
 
@@ -50,13 +68,15 @@
     }
     .text-container {
       @include not-mobile{
-        padding-right: 30px;
+        padding-right: 33px;
         padding-left: 30px;
       }
       padding-top: 20px;
-      border-top: 2px solid white;
-      max-height: 600px;
-      transition: max-height 0.4s ease-in;
+      @include mobile{
+        border-top: 2px solid white;
+      }
+      max-height: 800px;
+      transition: max-height 0.4s ease-in, padding 0.5s;
 
       @include mobile{
         max-height: 2100px;

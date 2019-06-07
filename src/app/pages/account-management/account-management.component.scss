@@ -1,10 +1,93 @@
 @import '../../../styles/variables';
 
 .account {
-  ::ng-deep {
+  /*::ng-deep {
+    .mat-tab-labels{
+      @include not-mobile{
+        padding-right: 10px;
+      }
+    }
+    .mat-tab-header-pagination{
+      border: 1px solid $StrokeGrey;
+    }
     .mat-tab-group {
       font-family: $CIBCLightRegularFont;
-      padding-right: 3px;
+      padding: 0 15px;
+
+      @include mobile{
+        padding: 0 4px 0 8px;
+      }
+    }
+    .mat-tab-body-content {
+      overflow: hidden !important;
+    }
+
+    .mat-tab-label {
+      @include not-mobile {
+        width: 33.33%;
+      }
+      opacity: 1 !important;
+      border-left: 1px solid $StrokeGrey;
+      border-top: 1px solid $StrokeGrey;
+      border-bottom: 1px solid $StrokeGrey;
+      height: 69px;
+
+      &:last-child{
+        border-right: 1px solid $StrokeGrey;
+      }
+
+    }
+    .mat-tab-label-content {
+      font-size: 17px;
+      font-family: $CIBCLightRegularFont;
+      color: $TextGrey;
+      letter-spacing: 2px;
+    }
+
+    .mat-tab-label-active {
+      border-top: 3px solid $CIBCBurgundy;
+      border-bottom: none;
+      .mat-tab-label-content {
+        color: $CIBCBurgundy;
+      }
+    }
+    .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+      display: none;
+    }
+    .mat-tab-header, .mat-tab-nav-bar {
+      border-bottom: none;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+  }*/
+  ::ng-deep {
+    .mat-tab-label{
+      @include mobile{
+        padding: 0 !important;
+      }
+    }
+
+    .mat-tab-label .mat-tab-label-content{
+      @include mobile{
+        white-space: normal !important;;
+      }
+    }
+
+    .mat-tab-labels{
+      @include not-mobile{
+        padding-right: 10px;
+      }
+    }
+    .mat-tab-header-pagination{
+      border: 1px solid $StrokeGrey;
+    }
+    .mat-tab-group {
+      font-family: $CIBCLightRegularFont;
+      padding: 0 15px;
+
+      @include mobile{
+        padding: 0 4px 0 8px;
+      }
     }
     .mat-tab-body-content {
       overflow: hidden !important;
@@ -61,7 +144,7 @@
     padding: 0 30px;
 
     @include mobile {
-      padding: 0 15px;
+      padding: 0;
     }
   }
 
@@ -119,6 +202,9 @@
 
     .next-col {
       text-align: right;
+      @include mobile{
+        padding: 0 20px;
+      }
     }
     .update-col {
       .app-button-primary {

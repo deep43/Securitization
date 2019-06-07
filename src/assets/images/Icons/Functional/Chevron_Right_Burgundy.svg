@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="14px" viewBox="0 0 8 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Chevron_Right_Burgundy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 0 6.59 7 0 13.991 1.41 13.991 8 7 1.41 0"></polygon>
+    </defs>
+    <g id="Working" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons-/-Functional-/-Chevron-Right">
+            <g id="Clipped">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Path"></g>
+                <rect id="Rectangle" fill="#8B1D41" mask="url(#mask-2)" x="0" y="-1" width="8" height="16"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -20,9 +20,13 @@
           <div class="col-lg-4 col-sm-4 col-4 text Securitization-table-col">{{row.name}}</div>
           <div class="col-lg-3 col-sm-3 col-3 date Securitization-table-col">{{row.date}}</div>
           <div class="col-lg-3 col-sm-3 col-3 Securitization-table-col">{{row.language}}</div>
-          <div class="col-lg-1 col-sm-1 col-1 Securitization-table-col"><img class="img-col" src="assets/images/Icons_Download.png"></div>
+          <div class="col-lg-1 col-sm-1 col-1 Securitization-table-col">
+            <!--<img class="img-col" src="assets/images/Icons_Download.png">-->
+            <img class="img-col" src="/assets/images/Icons/Functional/Download.svg">
+          </div>
           <div class="col-lg-1 col-sm-1 col-1 Securitization-table-col show-details" (click)="toggleRow(row)">
-            <img class="img-col" src="assets/images/Icons_Chevron_Down.png">
+            <!--<img class="img-col" src="assets/images/Icons_Chevron_Down.png">-->
+            <img class="img-col" src="/assets/images/Icons/Functional/Chevron_Down.svg">
           </div>
           <div class="col-lg-12 col-sm-12 col-12 dates-container">
             <div class="row" *ngFor="let date of row.dates">

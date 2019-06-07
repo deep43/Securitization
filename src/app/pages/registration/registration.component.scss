@@ -7,9 +7,17 @@ $delay: .3s;
   line-height: 26px;
   .registration-container {
     padding: 0 30px;
+    @include mobile {
+      padding: 0 23px 0 27px;
+    }
   }
-  .checkbox-section{
-    padding-left: 4px
+  .step-0-1 {
+    @include not-mobile{
+      padding-left: 15px;
+    }
+  }
+  .checkbox-section {
+    padding-left: 15px
   }
   .title-row {
     margin-top: 30px;
@@ -82,13 +90,13 @@ $delay: .3s;
   }
 
   .reg-success-text {
-    font-size: 13px;
-    padding: 0 40px;
+    //font-size: 13px;
+    //padding: 0 40px;
   }
 
   .reg-success {
-    background-color: rgba(77, 255, 248, 0.15);
-    padding: 20px 15px;
+    color: $CIBCBurgundy;
+    //padding: 20px 15px;
 
     i {
       color: green;
@@ -101,8 +109,7 @@ $delay: .3s;
 
   .next-row {
     margin-top: 20px;
-    padding: 0 3px;
-
+    padding: 0 6px 0 3px;
     .next-col {
       text-align: right;
     }
@@ -155,7 +162,11 @@ $delay: .3s;
 
   .app-button-secondary {
     margin-right: 20px;
+    @include mobile{
+      margin-bottom: 10px;
+    }
   }
+
 
 }
 
@@ -168,4 +179,29 @@ $delay: .3s;
 
 .modal {
   background: rgba(0, 0, 0, 0.62);
+}
+
+.reg-success-notification{
+  background-color: #DAEAEF;
+  position: fixed;
+  max-width: 100%;
+  width: 100%;
+  overflow: hidden;
+  top: 0;
+  z-index: 15 !important;
+  i {
+    color: green;
+  }
+
+  .content{
+    padding: 15px 30px;
+  }
+  .close-notification{
+    float: right;
+    cursor: pointer;
+    padding-right: 5px;
+    i{
+      color: $Charcoal;
+    }
+  }
 }

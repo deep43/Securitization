@@ -1,5 +1,5 @@
-import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Component, HostListener, OnInit, ViewChild, ChangeDetectorRef, OnDestroy} from '@angular/core';
+import {BreakpointObserver, Breakpoints, MediaMatcher} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
@@ -52,18 +52,22 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 
 export class AppHeaderComponent implements OnInit {
   @ViewChild(MatSidenav) drawer: MatSidenav;
+  @ViewChild(HTMLElement) MobileToolbar: HTMLElement;
   toggleSideNav = false;
   toggleDropdown = false;
   headerMenuOpened = false;
   reportMenuOpened = false;
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  isFireFox = false;
+  isHandset$: MediaQueryList;
+  /*isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
-    );
+    );*/
+  private _mobileQueryListener: () => void;
 
   constructor(private router: Router, private route: ActivatedRoute,
-              private breakpointObserver: BreakpointObserver) {
+              private breakpointObserver: BreakpointObserver, changeDetectorRef:
+                ChangeDetectorRef, media: MediaMatcher) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -72,12 +76,48 @@ export class AppHeaderComponent implements OnInit {
       this.reportMenuOpened = false;
     });
 
+    this.isHandset$ = media.matchMedia('(max-width: 768px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.isHandset$.addListener(this._mobileQueryListener);
+
   }
 
   ngOnInit() {
     window.scroll(0, 0);
+
+    if(/Android/.test(navigator.appVersion)){
+      window.addEventListener("resize", function(){
+        if(document.activeElement.tagName=="INPUT"){
+          window.setTimeout(function(){
+            document.activeElement['scrollIntoViewIfNeeded']();
+          },0);
+        }
+      })
+    }
+
+    if(this.getBrowserName().indexOf('firefox') >= 0){
+      this.isFireFox = true;
+    }
+
   }
 
+  getBrowserName(){
+    return navigator['sayswho']= (function(){
+      var ua= navigator.userAgent, tem,
+        M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+      if(/trident/i.test(M[1])){
+        tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+        return 'IE '+(tem[1] || '');
+      }
+      if(M[1]=== 'Chrome'){
+        tem= ua.match(/\b(OPR|Edge?)\/(\d+)/);
+        if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera').replace('Edg ', 'Edge ');
+      }
+      M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+      if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+      return M.join(' ');
+    })();
+  }
   toggleMobileDropdown() {
     this.toggleDropdown = !this.toggleDropdown;
   }
@@ -99,7 +139,10 @@ export class AppHeaderComponent implements OnInit {
     this.onWindowScroll(e);
   });*/
 
-  toggleDrawer() {
+  toggleDrawer(e) {
+    /*e.preventDefault();
+    e.stopPropagation();*/
+
     this.drawer.toggle();
     this.toggleSideNav = !this.toggleSideNav;
   }
@@ -118,10 +161,11 @@ export class AppHeaderComponent implements OnInit {
     this.reportMenuOpened = !this.reportMenuOpened;
   }
 
-  clickedOutSearch() {
+  clickedOutSearch(e) {
     if (this.headerMenuOpened) {
       this.headerMenuOpened = false;
-      //this.clearSearchBoxes();
+      //this.MobileToolbar.focus();
     }
   }
+
 }

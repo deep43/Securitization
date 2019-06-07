@@ -1,9 +1,13 @@
 @import '../../../styles/variables';
-.banner{
-  &.on-mobile{
+
+.banner {
+  &.on-mobile {
+    //padding-top: 0;
+  }
+  @include below-tablet{
     padding-top: 70px;
   }
-  .banner-title{
+  .banner-title {
     color: $CIBCBurgundy;
     font-size: 36px;
     margin-top: -60px;
@@ -11,37 +15,97 @@
     background: white;
     padding: 20px 30px;
 
-    .app-title{
+    .app-title {
       font-size: 16px;
       letter-spacing: 2px;
     }
 
-    @include mobile{
+    @include mobile {
       font-size: 30px;
       margin-top: 0;
-      padding: 20px;
+      padding: 20px 23px 0 27px;
     }
   }
 
-  .image-conatiner{
-    img{
+  .image-conatiner {
+    opacity: 0;
+    //background: #d3d3d3;
+    transition: opacity 0.8s ease-in;
+    @include not-mobile{
+      height: 350px;
+    }
+
+    @include mobile{
+      height: 68px;
+    }
+
+    &.loaded{
+      opacity: 1;
+      height: auto;
+    }
+
+    img {
       width: 100%;
       //height: 300px;
 
-      @include mobile{
+      @include mobile {
         //height: 120px;
       }
       @media only screen and (max-width: 750px) {
-        img{
+        img {
           //height: 150px;
         }
       }
     }
   }
+
+  ::ng-deep {
+
+    /*.carousel-item {
+
+      !* Force to always be block *!
+      display: block !important;
+      //z-index: 1;
+      //position: absolute;
+      transform: translateX(100%);
+      opacity: 0;
+      transition: all 1s;
+      //visibility: hidden;
+    }
+
+    .carousel-item.active {
+      position: relative;
+      transform: translateX(0);
+      visibility: visible;
+      opacity: 1;
+    }*/
+    .carousel-inner {
+      overflow: visible;
+    }
+
+    .carousel-item {
+      display: block;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 2s ease-in-out, visibility 2.2s;
+      z-index: -1;
+      //position: absolute;
+      @include mobile{
+        //transition: opacity 3.2s ease-in-out, visibility 2.2s;
+        transition: opacity 3s ease-in-out, visibility 3.2s;
+      }
+    }
+
+    .carousel-item.active{
+      opacity: 1;
+      visibility: visible;
+      //z-index: 10;
+    }
+  }
 }
 
-@media only screen and (max-device-height: 667px) and (orientation : landscape) {
-  .image-conatiner{
+@media only screen and (max-device-height: 667px) and (orientation: landscape) {
+  .image-conatiner {
     //margin-top: 68px;
   }
 }

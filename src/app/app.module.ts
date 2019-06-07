@@ -24,6 +24,9 @@ import { ForgotUsernameComponent } from './pages/forgot-username/forgot-username
 import {MatInputModule} from '@angular/material/input';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ClickOutsideModule} from 'ng-click-outside';
+import {ClickElsewhereDirective} from './shared/click-outside.directive';
+import {AccountMobileManagementComponent} from './pages/account-mobile-management/account-mobile-management.component';
+import {PhoneMaskDirective} from './helpers/phone-mask-directive';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import {ClickOutsideModule} from 'ng-click-outside';
     LoginComponent,
     MainLayoutComponent,
     ForgotPasswordComponent,
-    ForgotUsernameComponent
+    AccountMobileManagementComponent,
+    ForgotUsernameComponent,
+    ClickElsewhereDirective,
+    PhoneMaskDirective
   ],
   imports: [
     BrowserModule,

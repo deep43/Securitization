@@ -1,7 +1,7 @@
 <div class="footer-component">
   <div class="container footer-container">
     <div class="row first-row">
-      <div class="col-12 col-sm-6 col-md-6 col-lg-6 thick-text-col padding-0">
+      <div class="col-12 col-sm-6 col-md-6 col-lg-6 thick-text-col padding-0 top-thick-text-col">
         <span class="thick-text">CIBC Capital Markets Locations</span>
       </div>
       <div class="col-12 col-sm-6 col-md-6 col-lg-6 padding-0">
@@ -20,7 +20,7 @@
            (click)="toggleMobileFooterLinks(footerLink, $event)">
           <div class="row">
             <div class="col-9 col-sm-9 col-md-9 col-lg-9">{{footerLink.heading}}</div>
-            <div class="col-3 col-sm-3 col-md-3 col-lg-3 dp-icon"></div>
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3 dp-icon" [ngClass]="{'opened': footerLink.opened}"></div>
           </div>
           <span></span>
         </a>
@@ -42,7 +42,7 @@
           <a href="#" class="footer-link important-heading">Accessibility at CIBC</a>
           <a href="#" class="footer-link icon-links">Contrast:
             <img class="contrast-icon" src="assets/images/Minus.png" (click)="toggleContrast(false, $event)">
-            <img class="contrast-icon" src="assets/images/Plus.png" (click)="toggleContrast(true, $event)">
+            <img class="contrast-icon" src="/assets/images/Icons/Functional/More_reverse.svg" (click)="toggleContrast(true, $event)">
           </a>
           <a href="#" class="footer-link text-links">
             <span class="">Text Size:</span>
@@ -66,15 +66,27 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row social-row">
         <div class="col-12 col-sm-9 col-md-9 col-lg-9 footer-logo-section">
           <div class="footer-logo">
-            <img src="assets/images/Footer_Logo.png">
+            <img class="logo-image" src="assets/images/Footer_Logo.png">
             <div class="mobile-social-section">
-              <i class="icofont icofont-social-facebook"></i>
+              <!--<i class="icofont icofont-social-facebook"></i>
               <i class="icofont icofont-youtube-play"></i>
               <i class="icofont icofont-social-twitter"></i>
-              <i class="icofont icofont-social-linkedin"></i>
+              <i class="icofont icofont-social-linkedin"></i>-->
+              <span>
+                <img src="/assets/images/Icons/Social/Facebook.svg">
+              </span>
+              <span>
+                <img src="/assets/images/Icons/Social/LinkedIn.svg">
+              </span>
+              <span>
+                <img src="/assets/images/Icons/Social/Twitter.svg">
+              </span>
+              <span>
+                <img src="/assets/images/Icons/Social/Youtube.svg">
+              </span>
             </div>
           </div>
           <div class="connect-text">
@@ -82,10 +94,22 @@
           </div>
         </div>
         <div class="col-12 col-sm-3 col-md-3 col-lg-3 social-section">
-          <i class="icofont icofont-social-facebook"></i>
+          <!--<i class="icofont icofont-social-facebook"></i>
           <i class="icofont icofont-youtube-play"></i>
           <i class="icofont icofont-social-twitter"></i>
-          <i class="icofont icofont-social-linkedin"></i>
+          <i class="icofont icofont-social-linkedin"></i>-->
+          <span>
+                <img src="/assets/images/Icons/Social/Facebook.svg">
+              </span>
+          <span>
+                <img src="/assets/images/Icons/Social/LinkedIn.svg">
+              </span>
+          <span>
+                <img src="/assets/images/Icons/Social/Twitter.svg">
+              </span>
+          <span>
+                <img src="/assets/images/Icons/Social/Youtube.svg">
+              </span>
         </div>
       </div>
     </div>

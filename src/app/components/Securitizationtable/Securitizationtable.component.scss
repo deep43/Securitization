@@ -3,9 +3,10 @@
 .Securitization-table-component {
   padding: 20px 0;
 
-  .table-container{
-    @include not-mobile{
+  .table-container {
+    @include not-mobile {
       margin: 0 25px;
+      padding-right: 35px;
     }
   }
 
@@ -25,10 +26,10 @@
     //font-family: $CIBCSemiBoldFont;
     border-bottom: 2px solid $TextGrey;
     font-family: $CIBCSemiBoldFont;
-    @include not-mobile{
+    @include not-mobile {
       margin-right: 20px;
     }
-    @include mobile{
+    @include mobile {
       padding: 0 24px;
     }
   }
@@ -55,7 +56,7 @@
 
       .text-date {
         font-family: $CIBCSemiBoldFont;
-        @include not-mobile{
+        @include not-mobile {
           padding-left: 24px;
         }
       }
@@ -89,10 +90,10 @@
     font-size: 14px;
     border-bottom: 1px solid $StrokeGrey;
     color: $TextGrey;
-    @include not-mobile{
+    @include not-mobile {
       margin-right: 20px;
     }
-    @include mobile{
+    @include mobile {
       padding: 0 24px;
     }
     .show-details {
@@ -142,32 +143,45 @@
 
     .text {
       font-family: $CIBCSemiBoldFont;
-      @include not-mobile{
+      @include not-mobile {
         padding-left: 24px;
       }
     }
   }
-  .title-head{
-    @include mobile{
+  .title-head {
+    @include mobile {
       //padding-left: 20px !important;
     }
   }
   .Securitization-table-col {
     padding: 12px 0;
 
-    .img-col{
-      @include mobile{
-        padding: 15px 20px;
+    .img-col {
+      width: 16px;
+      height: 16px;
+      @include not-mobile {
+        margin-bottom: 2px;
       }
+      @include mobile {
+        //padding: 15px 10px;
+        /*width: auto;
+        height: auto;*/
+        margin-top: 10px;
+      }
+
     }
 
+    &.show-details {
+      .img-col {
+        @include not-mobile {
+          margin-bottom: 0;
+        }
+      }
 
-
-    &.show-details{
-      img{
-        padding-top: 5px;
-        @include mobile{
-          padding-top: 18px;
+      img {
+        padding-top: 3px;
+        @include mobile {
+          //padding-top: 18px;
         }
       }
     }

@@ -10,6 +10,7 @@ import {
   MatIconModule,
   MatListModule
 } from '@angular/material';
+import {ClickOutsideModule} from 'ng-click-outside';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import {
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    ClickOutsideModule
   ],
   declarations: [AppHeaderComponent],
   exports: [AppHeaderComponent]

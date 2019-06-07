@@ -23,26 +23,27 @@
         </p>
       </div>
       <div class="col-12 col-sm-8 col-md-8 col-lg-8 right-col" id="form-section">
-        <div class="body-wrapper">
-          <div class="body" [ngClass]="{'active': step === 0 || step === 1}">
-            <div class="content"
-                 [ngClass]="{'transform-me-back': step === 0 || step === 1, 'transform-me-prev': step === 2}">
-              <div class="step-0-1 form-group" [ngClass]="{'hidden': step >= 2}">
-                <label class="input-label select-label">I am a:</label>
-                <!--<ngx-select-dropdown [config]="config" [options]="dropdownOptions"
-                                     [(ngModel)]="isUSClient" [multiple]="false"
-                                     (change)="onSelectionChanged($event)"></ngx-select-dropdown>-->
-                <div class="app-select-container">
-                  <select class="app-select" (change)="onSelectionChanged($event)">
-                    <option class="" value="" selected>Please Select</option>
-                    <option *ngFor="let item of dropdownOptions" value={{item.id}}>{{item.name}}</option>
-                  </select>
-                  <span class="img-span">
+
+        <div class="step-0-1 form-group" [ngClass]="{'hidden': step >= 2}">
+          <label class="input-label select-label">I am a:</label>
+          <!--<ngx-select-dropdown [config]="config" [options]="dropdownOptions"
+                               [(ngModel)]="isUSClient" [multiple]="false"
+                               (change)="onSelectionChanged($event)"></ngx-select-dropdown>-->
+          <div class="app-select-container">
+            <select class="app-select" (change)="onSelectionChanged($event)">
+              <option class="" value="" selected>Please Select</option>
+              <option *ngFor="let item of dropdownOptions" value={{item.id}}>{{item.name}}</option>
+            </select>
+            <span class="img-span">
                 <img class="img-col" src="assets/images/Icons_Chevron_Down.png">
             </span>
-                </div>
-              </div>
-              <div class="checkbox-section" [ngClass]="{'hidden': step != 1}">
+          </div>
+        </div>
+        <div class="body-wrapper">
+          <div class="body" [ngClass]="{'active': step === 1}">
+            <div class="content"
+                 [ngClass]="{'transform-me-next': step === 0, 'transform-me-back': step === 1}">
+              <div class="checkbox-section">
                 <div class="check-box-row m-t-25" *ngFor="let checkListItem of checkList">
                   <mat-checkbox class="app-check-box" [(ngModel)]="checkListItem.checked"
                                 (change)="onCheckListChanged()">
@@ -50,7 +51,14 @@
                   </mat-checkbox>
                 </div>
               </div>
-              <div class="checkbox-section" [ngClass]="{'hidden': !showCheckList2}">
+            </div>
+          </div>
+        </div>
+        <div class="body-wrapper">
+          <div class="body" [ngClass]="{'active': showCheckList2 && step === 1}">
+            <div class="content"
+                 [ngClass]="{'transform-me-next': !showCheckList2, 'transform-me-back': showCheckList2}">
+              <div class="checkbox-section">
                 <div class="check-box-row m-t-25" *ngFor="let checkListItem2 of checkList2">
                   <label class="check-box-label">{{checkListItem2.label}}</label>
                   <mat-checkbox class="app-check-box" [(ngModel)]="checkListItem2.checked">
@@ -61,6 +69,7 @@
             </div>
           </div>
         </div>
+
         <div class="step-2 body-wrapper">
           <form [formGroup]="registerForm" class="register-form body"
                 [ngClass]="{'active': step === 2}"
@@ -171,10 +180,12 @@
               <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
                 <div class="form-group">
                   <label class="input-label">Phone</label>
-                  <input formControlName="phone" class="app-text-box form-control"
-                         [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" type="text"/>
+                  <input appPhoneMask formControlName="phone" class="app-text-box form-control" type="text"
+                         pattern="^\(([0-9]{3})\)[ ]([0-9]{3})[-]([0-9]{4})$" maxlength="14"
+                         [ngClass]="{ 'is-invalid': submitted && f.phone.errors }"/>
                   <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
                     <div *ngIf="f.phone.errors.required">Phone is required</div>
+                    <div *ngIf="f.phone.errors.pattern">Format should be: (111) 111-1111</div>
                   </div>
                 </div>
               </div>
@@ -187,6 +198,16 @@
                   <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                     <div *ngIf="f.email.errors.required">Email is required</div>
                     <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+                <div class="form-group">
+                  <label class="input-label">Username *</label>
+                  <input formControlName="userName" class="app-text-box form-control"
+                         [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" type="text"/>
+                  <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+                    <div *ngIf="f.userName.errors.required">userName is required</div>
                   </div>
                 </div>
               </div>
@@ -206,7 +227,7 @@
           <form [formGroup]="registerFormClient" class="register-form body register-form-client"
                 [ngClass]="{'active': step === 2}"
                 (ngSubmit)="onSubmit()" id="client-form">
-            <div class="form-label">I am a client of:</div>
+            <div class="form-label">CIBC Representative Detail:</div>
             <div class="row content"
                  [ngClass]="{'transform-me-back': step === 2,
               'transform-me-next': step === 1 , 'transform-me-prev': step === 3}">
@@ -257,10 +278,11 @@
                   <!--<ngx-select-dropdown [config]="config" [options]="companyDropdownOptions"
                                        [(ngModel)]="company" [multiple]="false"></ngx-select-dropdown>-->
                   <div class="app-select-container">
-                    <select formControlName="company" class="app-select form-control"
+                    <select formControlName="company" class="app-select form-control disabled"
                             [ngClass]="{ 'is-invalid': submitted && fClient.company.errors }">
-                      <option class="" value="" selected>Please Select</option>
-                      <option *ngFor="let item of companyDropdownOptions" value={{item.id}}>{{item.name}}</option>
+                      <!--<option class="" value="" selected>Please Select</option>-->
+                      <option *ngFor="let item of companyDropdownOptions" value={{item.id}} selected>{{item.name}}
+                      </option>
                     </select>
                     <span class="img-span">
                         <img class="img-col" src="assets/images/Icons_Chevron_Down.png">
@@ -271,7 +293,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
+              <!--<div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
                 <div class="form-group">
                   <label class="input-label">Title</label>
                   <input formControlName="title" class="app-text-box form-control"
@@ -312,13 +334,15 @@
               <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
                 <div class="form-group">
                   <label class="input-label">Phone</label>
-                  <input formControlName="phone" class="app-text-box form-control"
+                  <input appPhoneMask formControlName="phone" class="app-text-box form-control"
+                         pattern="^\(([0-9]{3})\)[ ]([0-9]{3})[-]([0-9]{4})$" maxlength="14"
                          [ngClass]="{ 'is-invalid': submitted && fClient.phone.errors }" type="text"/>
                   <div *ngIf="submitted && fClient.phone.errors" class="invalid-feedback">
                     <div *ngIf="fClient.phone.errors.required">Phone is required</div>
+                    <div *ngIf="fClient.phone.errors.pattern">Format should be: (111) 111-1111</div>
                   </div>
                 </div>
-              </div>
+              </div>-->
 
               <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-t-10">
                 <div class="form-group">
@@ -403,10 +427,10 @@
           <div class="body" [ngClass]="{'active': step === 4}">
             <div class="row content animated-div" [ngClass]="{'transform-me-back': step === 4,
               'transform-me-next': step === 3, 'transform-me-prev': step === 5}">
-              <div class="col-12 col-sm-8 col-md-8 col-lg-8 m-t-10">
+              <div class="col-12 col-sm-8 col-md-8 col-lg-8">
                 <div class="reg-success">
-                  <i class="icofont icofont-check-circled"></i>
-                  Registration Completed with Success.
+                  <!--<i class="icofont icofont-check-circled"></i>-->
+                  REGISTRATION COMPLETED
                 </div>
               </div>
               <div class="col-12 col-sm-8 col-md-8 col-lg-8 m-t-10 reg-success-text">
@@ -453,6 +477,17 @@
           <button class="app-button-secondary" (click)="closeModal()">Close and Return</button>
           <button class="app-button-primary" (click)="closeModal()">Exit Site</button>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="reg-success-notification" [@openClose]="regSuccessNotificationOpened ? 'open' : 'closed'">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 content">
+        <span><i class="icofont icofont-check-circled"></i> Registration Completed With Success</span>
+        <span class="close-notification"><i class="icofont icofont-close-line" (click)="closeRegSuccessNotification()"></i></span>
       </div>
     </div>
   </div>

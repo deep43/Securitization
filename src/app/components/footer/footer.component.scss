@@ -29,6 +29,7 @@
     }
     margin-bottom: 30px;
     @include not-mobile{
+      margin-right: 10px;
       margin-left: 0;
     }
 
@@ -60,6 +61,11 @@
 
       .dp-icon {
         position: relative;
+        &.opened{
+          &:after {
+            transform: rotate(180deg);
+          }
+        }
         &:after {
           width: 0;
           height: 0;
@@ -160,6 +166,11 @@
       color: white;
     }
   }
+  .top-thick-text-col{
+    @include not-mobile{
+      margin-top: 9px;
+    }
+  }
   .thick-text-col {
     @include mobile {
       padding: 25px 15px;
@@ -210,6 +221,9 @@
     font-size: 12px;
     .logo-text-row{
       margin-left: 0;
+      @include not-mobile{
+        margin-right: 10px;
+      }
     }
     .privacy-row {
       text-align: right;
@@ -225,6 +239,7 @@
           border-top: 1px solid white;
           padding-top: 20px;
           padding-bottom: 10px;
+          margin-right: 15px;
         }
       }
 
@@ -242,17 +257,26 @@
     .social-section {
       text-align: right;
       padding-right: 0;
-      padding-top: 10px;
       @include mobile {
         display: none;
       }
-      i {
+      span {
         font-size: 24px;
-        padding: 5px;
+        padding: 5px 8px;
+
+        img{
+          width: 23px;
+          height: 23px;
+        }
 
         &:last-child {
-          padding: 0;
+          padding-right: 0;
         }
+      }
+    }
+    .social-row{
+      @include not-mobile{
+        margin-right: 10px;
       }
     }
     .footer-logo-section {
@@ -266,7 +290,7 @@
         border-top: 1px solid white;
         padding: 20px 0;
       }
-      img {
+      .logo-image {
         width: 150px;
         @include mobile {
           display: inline;
@@ -277,9 +301,14 @@
           display: inline;
           float: right;
           font-size: 18px;
-          margin-top: 10px;
-          i {
-            padding-left: 6px;
+          margin-top: 8px;
+          span {
+            padding-left: 8px;
+
+            img{
+              width: 21px;
+              height: 21px;
+            }
           }
         }
         @include not-mobile {

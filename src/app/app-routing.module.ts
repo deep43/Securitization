@@ -7,6 +7,7 @@ import {LoginComponent} from './pages/login/login.component';
 import {MainLayoutComponent} from './pages/main-layout/main-layout.component';
 import {ForgotPasswordComponent} from './pages/forgot-password/forgot-password.component';
 import {ForgotUsernameComponent} from './pages/forgot-username/forgot-username.component';
+import {AccountMobileManagementComponent} from './pages/account-mobile-management/account-mobile-management.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: 'account',
         component: AccountManagementComponent,
+      },
+      {
+        path: 'accountmobile',
+        component: AccountMobileManagementComponent,
       },
     ]
   },

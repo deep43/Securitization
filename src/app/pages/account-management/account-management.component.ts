@@ -76,7 +76,7 @@ export class AccountManagementComponent implements OnInit {
       lastName: 'Smith',
       city: 'Toronto',
       title: 'Analyst',
-      phone: '416-555-0188',
+      phone: '(416) 555-0188',
       email: 'joe.smith@company.com',
     });
   }
